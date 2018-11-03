@@ -1,0 +1,20 @@
+@extends('layout.defult')
+@section('contents')
+    @include('layout._errors')
+    <form method="post" action="{{route('login.store')}}" enctype="multipart/form-data">
+        <div class="form-group">
+            <label>帐号</label>
+            <input type="text" name="name" class="form-control" value="{{old('name')}}">
+            <label>密码</label>
+            <input type="password" name="password" class="form-control" value="{{old('password')}}">
+            <label>邮箱</label>
+            <input type="email" name="email" class="form-control" value="{{old('email')}}">
+
+        </div>
+        {{csrf_field()}}
+        <div class="checkbox">
+            <label><input type="checkbox" name="remember_token" @if(old('remember_token ')) checked="checked"@endif>记住密码</label>
+        </div>
+        <button class="btn-group-sm">登录</button>
+    </form>
+@stop
