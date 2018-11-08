@@ -37,6 +37,6 @@ class UsersessionController extends Controller
         return redirect(route('land'))->with('success','退出成功');
     }
 
-    //修改商户的个人密码
+    
 
 }

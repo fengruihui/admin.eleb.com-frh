@@ -15,11 +15,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//Rabac角色以及权限
+Route::resource('role','RoleController');
+Route::resource('permission','PermissionController');
+
+//导航栏的增删改查
+Route::resource('nav','NavController');
 //商家分类
 Route::resource('shopCategory','ShopCategoryController');
 
 //商家信息
-Route::resource('shop','ShopController');
+Route::resource('shop','ShopController')/*->middleware('auth')*/;
 //商家审核
 Route::get('ban','ShopController@ban')->name('ban');
 Route::get('audit{shop}','ShopController@audit')->name('audit');

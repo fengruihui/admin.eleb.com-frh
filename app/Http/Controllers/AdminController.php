@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 use App\Models\admin;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class AdminController extends Controller{
 
@@ -18,11 +21,11 @@ class AdminController extends Controller{
 
         //添加管理员
         public function create(){
-            return view('admin.add');
+            $roles=Role::all();
+            return view('admin.add',compact('roles'));
         }
-
+        //添加保存
         public function store(Request $request){
-
             $this->validate($request, [
                 'name' => 'required',
                 'email'=>'email',
@@ -37,12 +40,13 @@ class AdminController extends Controller{
                 'email.email'=>'邮箱不能为空',
             ]);
 
-            Admin::create([
+            $admin=Admin::create([
                 'name'=>$request->name,
                 'email'=>$request->email,
                 'password'=>bcrypt($request->password)
 
             ]);
+            $admin->assignRole($request->role);
             session()->flash('success','添加成功');
             return redirect(route('admin.index'));
         }
@@ -52,16 +56,20 @@ class AdminController extends Controller{
             session()->flash('success','删除成功');
             return redirect(route('admin.index'));
         }
+        //修改前获取一条数据回显
         public function edit(Admin $admin){
-            return view('admin.edit',['admin'=>$admin]);
+            $roles=Role::all();
+            return view('admin.edit',compact('admin','roles'));
         }
-
+        //修改保存数据
         public function update(Admin $admin,Request $request){
             $admin->update([
                 'name'=>$request->name,
                 'email'=>$request->email,
                 'password'=>bcrypt($request->password)
             ]);
+            $admin=Admin::where('name',$request->name)->first();
+            $admin->syncRoles($request->role);
             session()->flash('success','修改成功');
             return redirect(route('admin.index'));
         }

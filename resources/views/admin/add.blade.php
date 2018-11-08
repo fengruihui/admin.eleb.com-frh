@@ -12,7 +12,13 @@
                 <label>管理员邮箱</label>
                 <input type="text" name="email" class="form-control" value="{{old('email')}}">{{$errors->first('email')}}
             </div>
-
+            <div class="form-group form-inline">
+                <label><h3>相关角色</h3></label>
+                @foreach($roles as $role)
+                    <input type="checkbox" name="role[]" class="form-control" value="{{$role->id}}">
+                    {{$role->name}}
+                @endforeach
+            </div>
             <div class="form-group form-inline">
                 <label>密码</label>
                 <input type="password" name="password" class="form-control" value="{{old('password')}}">{{$errors->first('password')}}

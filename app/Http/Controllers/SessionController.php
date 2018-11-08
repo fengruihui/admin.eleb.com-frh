@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 class SessionController extends Controller
 {
     public function create(){
+
         return view('session.create');
     }
 
@@ -20,6 +21,7 @@ class SessionController extends Controller
             'password.required'=>'密码不能为空',
             'email.email'=>'邮箱格式不对哦',
         ]);
+
         //验证数据库是否有该帐号密码
         if (Auth::attempt(['name'=>$request->name,'email'=>$request->email,'password'=>$request->password])){
             return redirect(route('admin.index'))->with('success','登录成功');

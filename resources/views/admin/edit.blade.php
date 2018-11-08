@@ -12,15 +12,13 @@
                 <label>管理员邮箱</label>
                 <input type="text" name="email" class="form-control" value="{{$admin->email}}">{{$errors->first('email')}}
             </div>
-
-           {{-- <div class="form-group form-inline">
-                <label>密码</label>
-                <input type="password" name="password" class="form-control" value="">{{$errors->first('password')}}
-            </div>
             <div class="form-group form-inline">
-                <label>确认密码</label>
-                <input type="password" name="password_confirmation" class="form-control" value="">{{$errors->first('password_confirmation')}}
-            </div>--}}
+                <label><h3>相关角色</h3></label>
+                @foreach($roles as $role)
+                    <input type="checkbox" name="role[]" class="form-control" value="{{$role->id}}" @if($admin->hasRole($role)) checked @endif>
+                    {{$role->name}}
+                @endforeach
+            </div>
         </div>
         {{csrf_field()}}
         {{method_field('put')}}

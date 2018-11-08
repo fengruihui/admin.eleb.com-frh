@@ -12,7 +12,7 @@
             <ul class="nav navbar-nav">
                 <li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
 
-                <li class="dropdown">
+               {{-- <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">商家类 <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="{{route('shopCategory.create')}}">商家分类添加</a></li>
@@ -22,8 +22,10 @@
                         <li><a href="{{route('shop.index')}}">商家信息</a></li>
                         <li><a href="{{route('ban')}}">商家商家审核</a></li>
                     </ul>
-                </li>
-                <li class="dropdown">
+                </li>--}}
+                {!! \App\Models\Nav::getNavs() !!}
+
+               {{-- <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">商家活动类<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="{{route('activ.create')}}">商家活动添加</a></li>
@@ -32,16 +34,31 @@
                         <li><a href="{{route('conduct')}}">进行中的的活动</a></li>
                         <li><a href="{{route('end')}}">已经结束的活动</a></li>
                     </ul>
-                </li>
+                </li>--}}
 
-                <li class="dropdown">
+                {{--<li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">会员列表<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="{{route('member.index')}}">会员列表</a></li>
 
                     </ul>
+                </li>--}}
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Rbac<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{route('permission.index')}}">权限列表</a></li>
+                        <li><a href="{{route('permission.create')}}">添加权限</a></li>
+                        <li><a href="{{route('role.create')}}">添加角色</a></li>
+                        <li><a href="{{route('role.index')}}">角色列表</a></li>
+                    </ul>
                 </li>
-
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">导航栏<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{route('nav.create')}}">导航添加</a></li>
+                        <li><a href="{{route('nav.index')}}">导航列表</a></li>
+                    </ul>
+                </li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">

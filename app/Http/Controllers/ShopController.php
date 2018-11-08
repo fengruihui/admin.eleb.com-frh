@@ -6,6 +6,7 @@ use App\Models\Shop;
 use App\Models\ShopCategory;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ShopController extends Controller
@@ -21,6 +22,9 @@ class ShopController extends Controller
     }
     //添加表单
     public function create(){
+        if(!Auth::user()->can('shop.create')){
+            return '你没有权限';
+        }
         $shops=ShopCategory::all();//商家分类表的信息
         return view('shop.add',['shops'=>$shops]);
     }
